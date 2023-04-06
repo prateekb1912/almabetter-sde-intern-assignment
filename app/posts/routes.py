@@ -16,3 +16,4 @@ def post_text_message():
     post = create_post(message, latitude, longitude)
 
     return jsonify({'response': 'Post created successfully.'})
+
