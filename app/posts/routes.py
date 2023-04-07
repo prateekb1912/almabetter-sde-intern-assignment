@@ -35,6 +35,7 @@ def get_nearby_posts():
     try:
         lat = request.args.get('lat')
         lon = request.args.get('lon')
+        radius = request.args.get('radius', default=1000)
 
         if not (lat and lon):
             return jsonify({'error': 'location parameters are required'}), 400
@@ -43,7 +44,7 @@ def get_nearby_posts():
         page = int(request.args.get('page', default=1))
 
         # Currently assuming nearby to relate to a 1km distance
-        paginated_posts = filter_posts_by_distance(lat, lon, page)
+        paginated_posts = filter_posts_by_distance(lat, lon, radius, page)
         posts = []
 
         for post in paginated_posts.items:
