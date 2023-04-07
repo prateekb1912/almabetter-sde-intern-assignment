@@ -21,3 +21,10 @@ WeatherTweet is a Flask-based web application that allows users to post tweets w
     - Enable the PostGIS extension in the database: `CREATE EXTENSION postgis`
 4. Run the application using `python run.py`.
 5. The API will now be running on http://localhost:5000.
+
+## Endpoints
+
+- `POST /posts`: Create a new post with a message and location coordinates (latitude and longitude).
+- `GET /posts`: Get all posts in the database within the specified radius of the given location
+- `GET /generate`: Generate a number (default = 10) of random posts to add to the database. 
+- `GET /weather`: Get weather details for the specified location coordiantes using OpenWeatherMap API.
