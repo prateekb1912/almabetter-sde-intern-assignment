@@ -55,8 +55,6 @@ def generate_posts_data(num_posts = 50):
         post = Post(message=message, location=wkt_element, timestamp=timestamp)
         posts.append(post)
 
-    print(posts)
-    
     # Insert the posts into the database
     db.session.bulk_save_objects(posts)
     db.session.commit()

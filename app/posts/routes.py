@@ -1,6 +1,6 @@
 from flask import jsonify,request, Blueprint
 
-from app.posts.controller import create_post, filter_posts_by_distance
+from app.posts.controller import create_post, filter_posts_by_distance, generate_posts_data
 from app.utils.posts_utils import prettify_timestamp, serialize_location
 
 posts_bp = Blueprint('posts', __name__, url_prefix='/posts')
@@ -29,6 +29,7 @@ def get_nearby_posts():
     # extract page number, default = 1
     page = int(request.args.get('page', default=1))
 
+    # Currently assuming nearby to relate to a 1km distance
     paginated_posts = filter_posts_by_distance(lat, lon, page)
     posts = []
 
@@ -45,13 +46,20 @@ def get_nearby_posts():
     
     response_data = {
         'posts': posts,
-        'has_prev': paginated_posts.has_prev,
-        'has_next': paginated_posts.has_next,
         'page': paginated_posts.page,
-        'pages': paginated_posts.pages,
         'total': paginated_posts.total
     }
 
 
     return jsonify(response_data), 200
-    
+
+@posts_bp.route('/generate', methods=['GET'])
+def add_random_posts():
+    num_posts = int(request.args.get('num', default=10))
+
+    generate_posts_data(num_posts)
+
+    return jsonify({
+        'message': 'success',
+        'posts': num_posts
+    })
