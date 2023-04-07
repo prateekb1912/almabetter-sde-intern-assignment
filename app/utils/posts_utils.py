@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 
 import pytz
+from geoalchemy2.shape import to_shape
 
 
 def prettify_timestamp(timestamp):
