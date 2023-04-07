@@ -6,13 +6,12 @@ db = SQLAlchemy()
 def create_app():
     app = Flask(__name__)
 
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///weathertweets.db'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://admin:password@localhost:5432/weathertweets'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     db.init_app(app)
 
     with app.app_context():
-        app.test_client()
         db.create_all()
 
     return app
