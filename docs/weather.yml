@@ -1,0 +1,72 @@
+openapi: 3.0.0
+info:
+  title: Weather API
+  version: 1.0.0
+servers:
+  - url: http://localhost:5000/
+paths:
+  /weather:
+    get:
+      summary: Get current weather data for a location
+      parameters:
+        - in: query
+          name: lat
+          schema:
+            type: number
+            format: float
+          required: true
+          description: The latitude of the location
+        - in: query
+          name: lon
+          schema:
+            type: number
+            format: float
+          required: true
+          description: The longitude of the location
+      responses:
+        '200':
+          description: The weather data was retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      weather:
+                        type: string
+                        description: The current weather condition
+                      temp:
+                        type: number
+                        format: float
+                        description: The current temperature in Celsius
+                      humidity:
+                        type: number
+                        format: float
+                        description: The current humidity level as a percentage
+                      wind_speed:
+                        type: number
+                        format: float
+                        description: The current wind speed in meters per second
+                      cloudiness:
+                        type: number
+                        format: float
+                        description: The current cloudiness level as a percentage
+                      timezone:
+                        type: number
+                        format: float
+                        description: The timezone offset from UTC in hours
+                      city:
+                        type: string
+                        description: The name of the nearest city
+        '400':
+          description: Invalid input parameters
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: A description of the error

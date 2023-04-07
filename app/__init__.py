@@ -1,3 +1,4 @@
+from flasgger import Swagger
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
@@ -10,6 +11,7 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     db.init_app(app)
+    swagger = Swagger(app)
 
     with app.app_context():
         db.create_all()
