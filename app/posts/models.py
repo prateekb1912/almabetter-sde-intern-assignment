@@ -10,4 +10,4 @@ class Post(db.Model):
     timestamp = db.Column(db.DateTime(timezone=True), default = db.func.now())
 
     def __str__(self) -> str:
-        return f'{self.message} at {self.timestamp} and {self.location}'
+        return f'{self.message} at {self.timestamp}'
